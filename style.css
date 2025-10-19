@@ -1,0 +1,741 @@
+/* --- 1. Global Styles & Variables --- */
+:root {
+    --color-white: #ffffff;
+    --color-black: #1a1a1a;
+    --color-dark-red: #800020;    /* แดงไวน์เข้ม */
+    --color-light-red: #A0333A;   /* แดงไวน์อ่อน (สำหรับ hover, accents) */
+    --color-purple-pastel: #B19CD9; /* ม่วงพาสเทล */
+    --color-text-light: #f0f0f0;  /* สีข้อความบนพื้นหลังเข้ม */
+    --color-text-dark: #333333;   /* สีข้อความบนพื้นหลังอ่อน */
+    --color-bg-dark: #22050E;     /* พื้นหลังเข้มหลัก */
+    --color-bg-light: #f8f8f8;    /* พื้นหลังอ่อน */
+
+    --font-heading: 'Montserrat', sans-serif; /* สำหรับหัวข้อ, ชื่อ */
+    --font-body: 'Prompt', sans-serif;       /* สำหรับเนื้อหาภาษาไทย */
+    --font-accent: 'Montserrat', sans-serif; /* สำหรับตัวอักษรเน้นพิเศษ (อาจใช้ตัวเอียงหรือ Bold) */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.6;
+    color: var(--color-text-dark);
+    background-color: var(--color-white);
+    overflow-x: hidden; /* ป้องกัน scrollbar แนวนอนที่ไม่ต้องการ */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-light-red);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--color-purple-pastel);
+}
+
+ul {
+    list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--color-black);
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+p {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+/* Icons */
+.icon-big {
+    font-size: 3em;
+    color: var(--color-purple-pastel);
+    margin-bottom: 15px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex; /* ใช้ flexbox จัดไอคอน */
+    align-items: center;
+    gap: 10px; /* ระยะห่างระหว่างข้อความกับไอคอน */
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.primary-btn {
+    background-color: var(--color-dark-red);
+    color: var(--color-white);
+    border-color: var(--color-dark-red);
+}
+
+.primary-btn:hover {
+    background-color: var(--color-light-red);
+    border-color: var(--color-light-red);
+}
+
+.secondary-btn {
+    background-color: transparent;
+    color: var(--color-dark-red);
+    border-color: var(--color-dark-red);
+}
+
+.secondary-btn:hover {
+    background-color: var(--color-dark-red);
+    color: var(--color-white);
+}
+
+.project-btn {
+    background-color: var(--color-purple-pastel);
+    color: var(--color-black);
+    border-color: var(--color-purple-pastel);
+}
+
+.project-btn:hover {
+    background-color: var(--color-dark-red);
+    color: var(--color-white);
+    border-color: var(--color-dark-red);
+}
+
+
+/* --- 2. Header Section --- */
+.main-header {
+    background-color: var(--color-bg-dark); /* พื้นหลัง Header เป็นสีเข้ม */
+    color: var(--color-white);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 2.2em;
+    color: var(--color-white);
+}
+
+.logo span {
+    color: var(--color-light-red); /* เน้นสีตัวอักษรบางส่วน */
+}
+
+.main-nav ul {
+    display: flex;
+}
+
+.main-nav ul li {
+    margin-left: 35px;
+}
+
+.main-nav ul li a {
+    color: var(--color-text-light);
+    font-weight: 400;
+    font-size: 1.1em;
+    position: relative;
+}
+
+.main-nav ul li a::after { /* เส้นใต้เมนูเมื่อ hover */
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-purple-pastel);
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s ease;
+}
+
+.main-nav ul li a:hover::after {
+    width: 100%;
+}
+
+
+/* --- 3. Hero Section --- */
+.hero-section {
+    background-color: var(--color-bg-dark); /* พื้นหลัง Hero เป็นสีเข้ม */
+    color: var(--color-text-light);
+    padding: 100px 0;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left; /* เปลี่ยนเป็นจัดซ้าย */
+    overflow: hidden; /* ซ่อนส่วนเกิน */
+    position: relative;
+    
+}
+
+.hero-section .container {
+    display: flex;
+    flex-wrap: wrap; /* รองรับการขึ้นบรรทัดใหม่ */
+    gap: 50px;
+    justify-content: space-around;
+    align-items: center; /* จัดให้อยู่กึ่งกลางในแนวตั้ง */
+    position: relative; /* สำคัญสำหรับ absolute positioning */
+}
+
+.hero-content {
+    flex: 1; /* ให้ใช้พื้นที่ที่เหลือ */
+    max-width: 600px;
+    z-index: 2;
+    position: relative;
+    text-align: left;
+}
+.giant-text-background {
+    position: absolute;
+    top: 50%;
+    left: 50%; /* จัดตำแหน่งกลาง */
+    transform: translate(-50%, -50%); /* จัดให้อยู่กึ่งกลางอย่างสมบูรณ์ */
+    font-family: var(--font-heading);
+    font-size: 15em; /* ขนาดใหญ่มาก */
+    font-weight: 900; /* ตัวหนาพิเศษ */
+    color: rgba(var(--color-purple-pastel), 0.1); /* สีจางๆ ที่ตัดกับชื่อ */
+    white-space: nowrap; /* ไม่ให้ขึ้นบรรทัดใหม่ */
+    pointer-events: none; /* ทำให้คลิกผ่านได้ */
+    user-select: none; /* ป้องกันการเลือกข้อความ */
+    text-transform: uppercase;
+    z-index: 0; /* ให้มันอยู่ข้างหลังชื่อ */
+    opacity: 0.6; /* ปรับความโปร่งใส */
+    letter-spacing: 5px;
+}
+
+.sub-headline {
+    font-family: var(--font-heading);
+    font-size: 1.5em;
+    font-weight: 300;
+    color: var(--color-purple-pastel);
+    display: block;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.main-headline {
+    font-family: var(--font-heading);
+    font-size: 4.5em; /* ขนาดตัวอักษรใหญ่ขึ้น */
+    margin-bottom: 20px;
+    font-weight: 700;
+    color: var(--color-white);
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    z-index: 3; /* ให้ชื่ออยู่ด้านบน */
+    position: relative; /* สำคัญสำหรับ z-index */
+}
+
+.hero-content p {
+    font-size: 1.3em;
+    color: var(--color-text-light);
+    margin-bottom: 40px;
+    font-weight: 300;
+}
+
+/* --- Background elements for hero section (Optional) --- */
+.hero-section::before,
+.hero-section::after {
+    content: '';
+    position: absolute;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+}
+
+.hero-section::before { /* ลายดอกไม้เล็กๆ */
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Scleria_hirtella_flowers.jpg/640px-Scleria_hirtella_flowers.jpg'); /* เปลี่ยนเป็นรูปดอกไม้ของคุณ */
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+    top: 50px;
+    left: 10%;
+    transform: rotate(20deg);
+}
+
+.hero-section::after { /* ลายกราฟิกอื่นๆ */
+    background-image: url('https://www.freeiconspng.com/uploads/abstract-png-2.png'); /* เปลี่ยนเป็นรูปทรงเรขาคณิตของคุณ */
+    background-size: contain;
+    width: 200px;
+    height: 200px;
+    bottom: 30px;
+    right: 5%;
+    transform: rotate(-30deg);
+}
+
+
+/* --- 4. General Section Styling --- */
+section {
+    padding: 80px 0;
+    text-align: center;
+    position: relative; /* สำหรับ background graphic */
+    overflow: hidden;
+}
+
+section:nth-of-type(odd) { /* สลับสีพื้นหลัง */
+    background-color: var(--color-bg-light);
+    color: var(--color-text-dark);
+}
+
+section:nth-of-type(even) {
+    background-color: var(--color-white);
+    color: var(--color-text-dark);
+}
+
+section h3 {
+    font-family: var(--font-heading);
+    font-size: 2.8em;
+    margin-bottom: 40px;
+    color: var(--color-black);
+    position: relative;
+    display: inline-block;
+    font-weight: 700;
+}
+
+section h3::after { /* เส้นใต้หัวข้อ */
+    content: '';
+    display: block;
+    width: 80px;
+    height: 5px;
+    background-color: var(--color-purple-pastel);
+    margin: 15px auto 0;
+    border-radius: 3px;
+}
+
+
+/* --- 5. About Section --- */
+.about-section {
+    background-color: var(--color-dark-red); /* พื้นหลัง About เป็นสีแดงไวน์ */
+    color: var(--color-white);
+    padding: 100px 0;
+}
+
+.about-section h3 {
+    color: var(--color-white);
+}
+
+.about-section h3::after {
+    background-color: var(--color-purple-pastel);
+}
+
+.about-grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 50px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.about-photo-card {
+    flex-shrink: 0;
+    width: 300px;
+    height: 400px;
+    position: relative;
+    background-color: var(--color-purple-pastel);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.about-photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    mix-blend-mode: multiply; /* สร้างเอฟเฟกต์สีซ้อนทับ */
+    filter: grayscale(10%); /* ทำให้รูปภาพมีสีน้อยลง */
+    transition: all 0.3s ease;
+}
+
+.about-photo-card:hover img {
+    filter: grayscale(0%);
+    mix-blend-mode: normal;
+}
+
+.about-name {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: var(--color-white);
+    font-family: var(--font-heading);
+    font-size: 1.8em;
+    font-weight: 700;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.about-content {
+    flex: 1;
+    color: var(--color-text-light);
+}
+
+.about-content p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    font-weight: 300;
+}
+
+
+/* --- 6. Skills Section --- */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.skill-item {
+    background-color: var(--color-white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    text-align: center;
+    border: 2px solid var(--color-light-gray);
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-item::before { /* เพิ่ม overlay effect */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(var(--color-purple-pastel), 0.1), rgba(var(--color-dark-red), 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.skill-item:hover::before {
+    opacity: 1;
+}
+
+.skill-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border-color: var(--color-purple-pastel);
+}
+
+.skill-item h4 {
+    font-size: 1.6em;
+    color: var(--color-black);
+    margin-bottom: 10px;
+}
+
+.skill-item p {
+    color: var(--color-dark-gray);
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+
+/* --- 7. Projects Section --- */
+.projects-section {
+    background-color: var(--color-bg-dark); /* พื้นหลัง Projects เป็นสีเข้ม */
+    color: var(--color-text-light);
+    padding: 100px 0;
+}
+
+.projects-section h3 {
+    color: var(--color-white);
+}
+
+.projects-section h3::after {
+    background-color: var(--color-light-red);
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.project-item {
+    background-color: var(--color-dark-red); /* พื้นหลัง item เป็นแดงไวน์ */
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--color-light-red);
+}
+
+.project-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.project-item img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.project-item:hover img {
+    transform: scale(1.05);
+}
+
+.project-info {
+    padding: 25px;
+    color: var(--color-text-light);
+}
+
+.project-info h4 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: var(--color-white);
+}
+
+.project-info p {
+    font-size: 1em;
+    margin-bottom: 20px;
+    color: var(--color-text-light);
+}
+
+
+/* --- 8. Contact Section --- */
+.contact-section {
+    background-color: var(--color-bg-light);
+}
+
+.contact-intro {
+    max-width: 700px;
+    margin: 0 auto 50px;
+    font-size: 1.2em;
+    color: var(--color-dark-gray);
+}
+
+.contact-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start; /* จัดให้อยู่ด้านบนของกริด */
+    gap: 50px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.contact-info-card {
+    flex: 1;
+    min-width: 300px;
+    background-color: var(--color-white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-top: 5px solid var(--color-purple-pastel);
+}
+
+.contact-info-card h4 {
+    font-size: 1.8em;
+    color: var(--color-dark-red);
+    margin-bottom: 25px;
+}
+
+.contact-info-card ul li {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    color: var(--color-dark-gray);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.contact-info-card ul li i {
+    color: var(--color-purple-pastel);
+    font-size: 1.2em;
+}
+
+.contact-info-card ul li a {
+    color: var(--color-dark-gray);
+}
+
+.social-links {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+    font-size: 1.8em;
+    justify-content: center; /* จัดให้อยู่ตรงกลางใน card */
+}
+
+.social-links a {
+    color: var(--color-dark-gray);
+}
+
+.social-links a:hover {
+    color: var(--color-dark-red);
+}
+
+.contact-form {
+    flex: 2;
+    min-width: 300px;
+    background-color: var(--color-white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-top: 5px solid var(--color-dark-red);
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid var(--color-light-gray);
+    border-radius: 5px;
+    font-family: var(--font-body);
+    font-size: 1em;
+    background-color: var(--color-white);
+    color: var(--color-black);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-form input[type="text"]:focus,
+.contact-form input[type="email"]:focus,
+.contact-form textarea:focus {
+    border-color: var(--color-purple-pastel);
+    box-shadow: 0 0 0 3px rgba(var(--color-purple-pastel), 0.2);
+    outline: none;
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+.contact-form button {
+    align-self: flex-end; /* จัดปุ่มไปขวา */
+}
+
+
+/* --- 9. Footer Section --- */
+.main-footer {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-light);
+    padding: 30px 0;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+
+/* --- 10. Responsive Design --- */
+@media (max-width: 992px) {
+    .main-header .container {
+        flex-direction: column;
+    }
+    .main-nav ul {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .main-nav ul li {
+        margin: 0 15px 10px;
+    }
+
+    .hero-section .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .main-headline {
+        font-size: 3.5em;
+        text-align: center;
+    }
+    .hero-section::before, .hero-section::after {
+        display: none; /* ซ่อน background elements บนมือถือ */
+    }
+
+    .about-grid {
+        flex-direction: column;
+        text-align: center;
+    }
+    .about-photo-card {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .about-content p {
+        text-align: left; /* คงการจัดซ้ายไว้ */
+    }
+
+    .skills-grid, .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+    .contact-info-card, .contact-form {
+        width: 100%;
+        max-width: 500px;
+    }
+    .social-links {
+        justify-content: flex-start; /* จัด Social Links ให้ชิดซ้าย */
+    }
+    .contact-form button {
+        align-self: stretch; /* ให้ปุ่มกว้างเต็มพื้นที่ */
+    }
+    .giant-text-background {
+        font-size: 8em; /* ลดขนาดบนมือถือ */
+        opacity: 0.3;
+        transform: translate(-50%, -50%) rotate(-5deg); /* อาจจะหมุนเล็กน้อย */
+    }
+}
+
+@media (max-width: 576px) {
+    .main-headline {
+        font-size: 2.8em;
+    }
+    .hero-content p {
+        font-size: 1.1em;
+    }
+    section h3 {
+        font-size: 2em;
+    }
+    .contact-info-card h4 {
+        font-size: 1.5em;
+    }
+    .logo {
+        font-size: 1.8em;
+    }
+    .giant-text-background {
+        font-size: 5em;
+    }
+}

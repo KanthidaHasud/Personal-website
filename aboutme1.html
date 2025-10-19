@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collection of favorite movies | KANTHIDA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Prompt:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* --- 1. Global Styles & Variables (คัดลอกจาก Portfolio หลัก) --- */
+        :root {
+            --color-white: #ffffff;
+            --color-black: #1a1a1a;
+            --color-dark-red: #800020; /* แดงไวน์เข้ม */
+            --color-light-red: #A0333A; /* แดงไวน์อ่อน */
+            --color-purple-pastel: #B19CD9; /* ม่วงพาสเทล */
+            --color-text-dark: #333333; /* สีข้อความบนพื้นหลังอ่อน */
+            --color-bg-dark: #22050E; /* พื้นหลังเข้มหลัก */
+            --color-bg-light: #f8f8f8; /* พื้นหลังอ่อน */
+        
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Prompt', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: var(--color-text-dark);
+            background-color: var(--color-bg-light);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ปุ่มหลัก */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .back-btn {
+            background-color: var(--color-dark-red);
+            color: var(--color-white);
+            margin-bottom: 40px;
+        }
+        
+        .back-btn:hover {
+            background-color: var(--color-light-red);
+        }
+
+        /* --- 2. Main Content & Header --- */
+        .movie-header {
+            background-color: var(--color-bg-dark);
+            color: var(--color-white);
+            padding: 40px 0 20px 0;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .movie-header h1 {
+            font-family: var(--font-heading);
+            font-size: 2.5em;
+            color: var(--color-white);
+            margin-bottom: 5px;
+        }
+        
+        .movie-header p {
+            font-size: 1.1em;
+            color: var(--color-purple-pastel);
+            margin-bottom: 0;
+        }
+        
+        /* --- 3. Poster Grid --- */
+        .poster-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            padding-bottom: 80px;
+        }
+
+        .poster-item {
+            display: block; /* ทำให้ลิงก์ครอบคลุมทั้งรูป */
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .poster-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .poster-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            aspect-ratio: 2 / 3; /* กำหนดสัดส่วนภาพมาตรฐานโปสเตอร์ */
+            transition: transform 0.5s ease;
+        }
+        
+        .poster-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Overlay ชื่อหนัง (Optional) */
+        .poster-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: var(--color-white);
+            padding: 15px 10px 10px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1em;
+            text-align: center;
+        }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            .poster-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            .movie-header h1 {
+                font-size: 2em;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="movie-header">
+        <div class="container">
+            <h1>My Favorite Movies 🍿</h1>
+            <p>คอลเลกชันภาพยนตร์ที่สร้างแรงบันดาลใจและน่าประทับใจ</p>
+        </div>
+    </div>
+
+    <div class="container">
+        
+        <a href="index.html" class="btn back-btn"><i class="fas fa-arrow-left"></i> ย้อนกลับ Portfolio</a>
+
+        <div class="poster-grid">
+            
+            <a href="https://www.imdb.com/title/tt8050740/?ref_=ext_shr_lnk" target="_blank" class="poster-item">
+                <img src="posters/11.jpg" alt="">
+                <div class="poster-overlay">Amphibia</div>
+            </a>
+            <a href="https://www.imdb.com/title/tt2758770/?ref_=ext_shr_lnk" target="_blank" class="poster-item">
+                <img src="posters/12.jpg" alt="">
+                <div class="poster-overlay">Start vs the forces of evil</div>
+            </a>
+            <a href="https://www.imdb.com/title/tt8050756/?ref_=ext_shr_lnk" target="_blank" class="poster-item">
+                <img src="posters/13.jpg" alt="">
+                <div class="poster-overlay">The owl house</div>
+            </a>
+            <a href="https://www.imdb.com/title/tt3061046/?ref_=ext_shr_lnk" target="_blank" class="poster-item">
+                <img src="posters/14.jpg" alt="">
+                <div class="poster-overlay">Steven universe</div>
+            </a>
+            <a href="https://www.imdb.com/title/tt1751105/?ref_=ext_shr_lnk" target="_blank" class="poster-item">
+                <img src="posters/15.jpg" alt="">
+                <div class="poster-overlay">My little pony</div>
+            </a>
+            <a href="https://www.imdb.com/title/tt2580046/?ref_=ext_shr_lnk" target="_blank" class="poster-item">
+                <img src="posters/16.jpg" alt="">
+                <div class="poster-overlay">Miraculous: Tales of Ladybug & Cat Noir</div>
+            </a>
+            <a href="https://www.imdb.com/title/tt2953050/?ref_=ext_shr_lnk" target="_blank" class="poster-item">
+                <img src="posters/21.jpg" alt="">
+                <div class="poster-overlay">Encanto</div>
+            </a>
+            <a href="https://www.imdb.com/title/tt2096673/?ref_=ext_shr_lnk" target="_blank" class="poster-item">
+                <img src="posters/22.jpg" alt="">
+                <div class="poster-overlay">Inside out</div>
+            </a>
+            <a href="https://www.imdb.com/title/tt0377092/?ref_=ext_shr_lnk" target="_blank" class="poster-item">
+                <img src="posters/31.jpg" alt="">
+                <div class="poster-overlay">Mean girls</div>
+            </a>
+            <a href="https://www.imdb.com/title/tt3228774/?ref_=ext_shr_lnk" target="_blank" class="poster-item">
+                <img src="posters/32.jpg" alt="">
+                <div class="poster-overlay">Cruella</div>
+            </a>
+            <a href="https://www.imdb.com/title/tt7798634/?ref_=ext_shr_lnk" target="_blank" class="poster-item">
+                <img src="posters/33.jpg" alt="">
+                <div class="poster-overlay">Ready or not</div>
+            </a>
+            <a href="https://www.imdb.com/title/tt1517268/?ref_=ext_shr_lnk" target="_blank" class="poster-item">
+                <img src="posters/34.jpg" alt="">
+                <div class="poster-overlay">Barbie</div>
+            </a>
+            <a href="https://www.imdb.com/title/tt0458352/?ref_=ext_shr_lnk" target="_blank" class="poster-item">
+                <img src="posters/35.jpg" alt="">
+                <div class="poster-overlay">The devil wears prada</div>
+            </a>
+            <a href="https://www.imdb.com/title/tt10172266/?ref_=ext_shr_lnk" target="_blank" class="poster-item">
+                <img src="posters/36.jpg" alt="">
+                <div class="poster-overlay">Red, white & Royal blue</div>
+            </a>
+            <a href="https://www.imdb.com/title/tt13443470/?ref_=ext_shr_lnk" target="_blank" class="poster-item">
+                <img src="posters/41.jpg" alt="">
+                <div class="poster-overlay">Wenesday</div>
+            </a>
+            <a href="https://www.imdb.com/title/tt1312171/?ref_=ext_shr_lnk" target="_blank" class="poster-item">
+                <img src="posters/42.jpg" alt="">
+                <div class="poster-overlay">The umbrella academy</div>
+            </a>
+                <a href="https://www.imdb.com/title/tt14664414/?ref_=ext_shr_lnk" target="_blank" class="poster-item">
+                <img src="posters/43.jpg" alt="">
+                <div class="poster-overlay">Young royals</div>
+            </a>
+            <a href="https://www.imdb.com/title/tt0944947/?ref_=ext_shr_lnk" target="_blank" class="poster-item">
+                <img src="posters/44.jpg" alt="">
+                <div class="poster-overlay">Game of Thrones</div>
+            </a>
+            <a href="https://www.imdb.com/title/tt4145384/?ref_=ext_shr_lnk" target="_blank" class="poster-item">
+                <img src="posters/45.jpg" alt="">
+                <div class="poster-overlay">Scream queens</div>
+            </a>
+            <a href="https://www.imdb.com/title/tt10638036/?ref_=ext_shr_lnk" target="_blank" class="poster-item">
+                <img src="posters/46.jpg" alt="">
+                <div class="poster-overlay">Heartstopper</div>
+            </a>
+
+
+            </div>
+
+        <a href="index.html" class="btn back-btn" style="margin-top: 20px;"><i class="fas fa-arrow-left"></i> ย้อนกลับ Portfolio</a>
+
+    </div>
+</body>
+</html>
